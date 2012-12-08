@@ -1,11 +1,15 @@
 # we don't want to provide private python extension libs
+%if %{_use_internal_dependency_generator}
+%define __noautoprovfiles '%{python_sitearch}/(.*)\\.so$'
+%else
 %define _exclude_files_from_autoprov ^%{python_sitearch}/.*\\\.so$
+%endif
 
-%define oname	pwquality
+%define oname pwquality
 
-%define major	1
+%define major 1
 %define libname %mklibname %{oname} %{major}
-%define devname	%mklibname %{oname} -d
+%define devname %mklibname %{oname} -d
 
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
@@ -88,9 +92,6 @@ applications.
 %install
 %makeinstall_std
 
-#we don't want these
-find %{buildroot} -name "*.la" -delete
-
 %find_lang %{name}
 
 %files tools -f %{name}.lang
@@ -113,3 +114,10 @@ find %{buildroot} -name "*.la" -delete
 
 %files -n python-pwquality
 %{python_sitearch}/%{oname}.so
+
+
+%changelog
+* Mon Jul 09 2012 Tomasz Pawel Gajc <tpg@mandriva.org> 1.1.1-1
++ Revision: 808654
+- import libpwquality
+
