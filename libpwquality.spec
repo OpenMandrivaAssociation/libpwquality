@@ -5,25 +5,22 @@
 %define _exclude_files_from_autoprov ^%{python_sitearch}/.*\\\.so$
 %endif
 
-%define oname pwquality
-
-%define major 1
-%define libname %mklibname %{oname} %{major}
-%define devname %mklibname %{oname} -d
+%define oname	pwquality
+%define major	1
+%define libname	%mklibname %{oname} %{major}
+%define devname	%mklibname %{oname} -d
 
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
 Version:	1.1.1
-Release:	1
-# The package is BSD licensed with option to relicense as GPL+
-# - this option is redundant as the BSD license allows that anyway.
-License:	BSD or GPL+
+Release:	2
+License:	BSD
 Group:		System/Libraries
-URL:		http://libpwquality.fedorahosted.org/
-Source0:	http://fedorahosted.org/releases/l/i/libpwquality/libpwquality-%{version}.tar.bz2
+Url:		http://libpwquality.fedorahosted.org/
+Source0:	http://fedorahosted.org/releases/l/i/libpwquality/%{name}-%{version}.tar.bz2
 BuildRequires:	libcrack-devel
 BuildRequires:	pam-devel
-BuildRequires:	python-devel
+BuildRequires:	pkgconfig(python)
 
 %description
 The libpwquality library purpose is to provide common functions for password
@@ -38,20 +35,33 @@ Summary:	Tools for password quality checking and generating random passwords
 Group:		System/Base
 Requires:	cracklib-dicts
 Provides:	%{oname} = %{version}-%{release}
-Provides:	%{name} = %{version}-%{release}
 
 %description tools
-The libpwquality library purpose is to provide common functions for password
-quality checking and also scoring them based on their apparent randomness.
+This package contains the tools for password quality checking and generation.
 
-The library also provides a function for generating random passwords with good
-pronounceability. The library supports reading and parsing of a configuration
-file.
+%package common
+Summary:	Data files for password quality checking and generating random passwords
+Group:		System/Base
+BuildArch:	noarch
+Conflicts:	libpwquality-tools < 1.1.1-2
+
+%description common
+This package contains the data files for %{name}.
+
+%package -n pam_pwquality
+Summary:	PAM module for %{oname}
+Group:		System/Libraries
+Requires:	cracklib-dicts
+Conflicts:	%{_lib}pwquality1 < 1.1.1-2
+Conflicts:	libpwquality-tools < 1.1.1-2
+
+%description -n pam_pwquality
+This package contains the PAM module for %{name}.
 
 %package -n %{libname}
 Summary:	Shared libraries for %{oname}
 Group:		System/Libraries
-Requires:	%{name}-tools >= %{version}-%{release}
+Requires:	%{name}-common >= %{version}-%{release}
 
 %description -n %{libname}
 The libpwquality library purpose is to provide common functions for password
@@ -84,8 +94,7 @@ applications.
 %configure2_5x \
 	--with-securedir=/%{_lib}/security \
 	--with-pythonsitedir=%{python_sitearch} \
-	--disable-static \
-	--disable-rpath
+	--disable-static
 
 %make
 
@@ -96,16 +105,20 @@ applications.
 
 %files tools -f %{name}.lang
 %doc COPYING README NEWS AUTHORS
-%config(noreplace) %{_sysconfdir}/security/%{oname}.conf
 %{_bindir}/pwmake
 %{_bindir}/pwscore
 %{_mandir}/man1/*
-%{_mandir}/man5/*
-%{_mandir}/man8/*
+
+%files common
+%config(noreplace) %{_sysconfdir}/security/%{oname}.conf
+%{_mandir}/man5/pwquality.conf.5*
+
+%files -n pam_pwquality
+/%{_lib}/security/pam_pwquality.so
+%{_mandir}/man8/pam_pwquality.8*
 
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
-/%{_lib}/security/pam_pwquality.so
 
 %files -n %{devname}
 %{_includedir}/%{oname}.h
@@ -114,10 +127,4 @@ applications.
 
 %files -n python-pwquality
 %{python_sitearch}/%{oname}.so
-
-
-%changelog
-* Mon Jul 09 2012 Tomasz Pawel Gajc <tpg@mandriva.org> 1.1.1-1
-+ Revision: 808654
-- import libpwquality
 
