@@ -1,2 +1,4 @@
+removed_sources:
+  libpwquality-1.1.1.tar.bz2: 8349cd8d74e52f84358f7340c2f01bc4017f7726
 sources:
-  "libpwquality-1.1.1.tar.bz2": 8349cd8d74e52f84358f7340c2f01bc4017f7726
+  libpwquality-1.2.3.tar.bz2: de21e7208a215b656a5ee5346c3feb357d2328b5
