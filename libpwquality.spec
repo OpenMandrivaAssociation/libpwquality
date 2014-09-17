@@ -12,8 +12,8 @@
 
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
-Version:	1.2.3
-Release:	7
+Version:	1.2.4
+Release:	1
 License:	BSD
 Group:		System/Libraries
 Url:		http://libpwquality.fedorahosted.org/
@@ -127,5 +127,3 @@ applications.
 
 %files -n python-pwquality
 %{py_platsitedir}/%{oname}.so
-
-
