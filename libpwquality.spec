@@ -12,15 +12,15 @@
 
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
-Version:	1.2.3
-Release:	7
+Version:	1.2.4
+Release:	1
 License:	BSD
 Group:		System/Libraries
 Url:		http://libpwquality.fedorahosted.org/
 Source0:	http://fedorahosted.org/releases/l/i/libpwquality/%{name}-%{version}.tar.bz2
 BuildRequires:	libcrack-devel
 BuildRequires:	pam-devel
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 
 %description
 The libpwquality library purpose is to provide common functions for password
@@ -126,6 +126,6 @@ applications.
 %{_libdir}/pkgconfig/%{oname}.pc
 
 %files -n python-pwquality
-%{py_platsitedir}/%{oname}.so
-
+%{py_platsitedir}/%{oname}.*.so
+%{py_platsitedir}/%{oname}-%{version}-py%{py_ver}.egg-info
 
