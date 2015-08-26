@@ -1,5 +1,2 @@
-removed_sources:
-  libpwquality-1.1.1.tar.bz2: 8349cd8d74e52f84358f7340c2f01bc4017f7726
-  libpwquality-1.2.3.tar.bz2: de21e7208a215b656a5ee5346c3feb357d2328b5
 sources:
-  libpwquality-1.2.4.tar.bz2: ba5d03319ab3e227d7f236d0ecbd0ec09f4be1d6
+  libpwquality-1.3.0.tar.bz2: a9f2eec48b9a04a836785e18c8b1f5a69d5920f7
