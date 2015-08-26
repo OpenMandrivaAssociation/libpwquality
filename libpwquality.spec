@@ -109,6 +109,7 @@ applications.
 %{_bindir}/pwmake
 %{_bindir}/pwscore
 %{_mandir}/man1/*
+%{_mandir}/man3/*
 
 %files common
 %config(noreplace) %{_sysconfdir}/security/%{oname}.conf
