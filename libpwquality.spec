@@ -13,7 +13,7 @@
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
 Version:	1.3.0
-Release:	2
+Release:	3
 License:	BSD
 Group:		System/Libraries
 Url:		http://libpwquality.fedorahosted.org/
