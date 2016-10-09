@@ -5,15 +5,15 @@
 %define _exclude_files_from_autoprov ^%{py_platsitedir}/.*\\\.so$
 %endif
 
-%define oname	pwquality
-%define major	1
-%define libname	%mklibname %{oname} %{major}
-%define devname	%mklibname %{oname} -d
+%define oname pwquality
+%define major 1
+%define libname %mklibname %{oname} %{major}
+%define devname %mklibname %{oname} -d
 
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
 Version:	1.3.0
-Release:	3
+Release:	4
 License:	BSD
 Group:		System/Libraries
 Url:		http://libpwquality.fedorahosted.org/
@@ -105,7 +105,6 @@ applications.
 %find_lang %{name}
 
 %files tools -f %{name}.lang
-%doc COPYING README NEWS AUTHORS
 %{_bindir}/pwmake
 %{_bindir}/pwscore
 %{_mandir}/man1/*
@@ -130,4 +129,3 @@ applications.
 %files -n python-pwquality
 %{py_platsitedir}/%{oname}.*.so
 %{py_platsitedir}/%{oname}-%{version}-py%{py_ver}.egg-info
-
