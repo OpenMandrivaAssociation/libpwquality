@@ -1,9 +1,4 @@
-# we don't want to provide private python extension libs
-%if %{_use_internal_dependency_generator}
-%define __noautoprovfiles '%{py_platsitedir}/(.*)\\.so$'
-%else
-%define _exclude_files_from_autoprov ^%{py_platsitedir}/.*\\\.so$
-%endif
+%define __provides_exclude '%{py_platsitedir}/(.*)\\.so$'
 
 %define oname pwquality
 %define major 1
@@ -12,8 +7,8 @@
 
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
-Version:	1.3.0
-Release:	5
+Version:	1.4.0
+Release:	1
 License:	BSD
 Group:		System/Libraries
 Url:		http://libpwquality.fedorahosted.org/
