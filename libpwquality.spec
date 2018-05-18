@@ -1,4 +1,4 @@
-%define __provides_exclude '%{py_platsitedir}/(.*)\\.so$'
+%define __provides_exclude_from '%{py_platsitedir}/(.*)\\.so$'
 
 %define oname pwquality
 %define major 1
@@ -8,7 +8,7 @@
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
 Version:	1.4.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		System/Libraries
 Url:		http://libpwquality.fedorahosted.org/
