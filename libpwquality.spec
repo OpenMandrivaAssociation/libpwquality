@@ -7,12 +7,12 @@
 
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
-Version:	1.4.0
-Release:	4
+Version:	1.4.2
+Release:	1
 License:	BSD
 Group:		System/Libraries
-Url:		http://libpwquality.fedorahosted.org/
-Source0:	http://fedorahosted.org/releases/l/i/libpwquality/%{name}-%{version}.tar.bz2
+Url:		https://github.com/libpwquality/libpwquality/
+Source0:	https://github.com/libpwquality/libpwquality/releases/download/libpwquality-%{version}/%{name}-%{version}.tar.bz2
 Source1:	pw_quality.pamd
 BuildRequires:	libcrack-devel
 BuildRequires:	pam-devel
@@ -48,6 +48,7 @@ This package contains the data files for %{name}.
 Summary:	PAM module for %{oname}
 Group:		System/Libraries
 Requires:	cracklib-dicts
+Requires:	pam
 Conflicts:	%{_lib}pwquality1 < 1.1.1-2
 Conflicts:	libpwquality-tools < 1.1.1-2
 
@@ -84,7 +85,7 @@ checking and generation of random pronounceable passwords from Python
 applications.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 %configure \
@@ -93,10 +94,10 @@ applications.
     --enable-pam \
     --disable-static
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/pw_quality
 
