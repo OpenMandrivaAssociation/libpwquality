@@ -7,8 +7,8 @@
 
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
-Version:	1.4.2
-Release:	2
+Version:	1.4.4
+Release:	1
 License:	BSD
 Group:		System/Libraries
 Url:		https://github.com/libpwquality/libpwquality/
