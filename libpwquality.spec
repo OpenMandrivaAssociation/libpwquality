@@ -88,6 +88,8 @@ applications.
 %autosetup -p1
 
 %build
+%global build_ldflags %{build_ldflags} -Wl,-undefined,dynamic_lookup
+
 %configure \
     --with-securedir=/%{_lib}/security \
     --with-pythonsitedir=%{py_platsitedir} \
