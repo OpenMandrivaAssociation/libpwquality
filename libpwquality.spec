@@ -14,6 +14,7 @@ Group:		System/Libraries
 Url:		https://github.com/libpwquality/libpwquality/
 Source0:	https://github.com/libpwquality/libpwquality/releases/download/libpwquality-%{version}/%{name}-%{version}.tar.bz2
 Source1:	pw_quality.pamd
+Patch0:		libpwquality-1.4.4-fix-python-linking.patch
 BuildRequires:	libcrack-devel
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig(python3)
