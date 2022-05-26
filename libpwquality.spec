@@ -8,7 +8,7 @@
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
 Version:	1.4.4
-Release:	1
+Release:	2
 License:	BSD
 Group:		System/Libraries
 Url:		https://github.com/libpwquality/libpwquality/
@@ -90,7 +90,7 @@ applications.
 
 %build
 %configure \
-    --with-securedir=/%{_lib}/security \
+    --with-securedir=%{_libdir}/security \
     --with-pythonsitedir=%{py_platsitedir} \
     --enable-pam \
     --disable-static
@@ -107,8 +107,8 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/pw_quality
 %files tools -f %{name}.lang
 %{_bindir}/pwmake
 %{_bindir}/pwscore
-%{_mandir}/man1/*
-%{_mandir}/man3/*
+%doc %{_mandir}/man1/*
+%doc %{_mandir}/man3/*
 
 %files common
 %config(noreplace) %{_sysconfdir}/security/%{oname}.conf
@@ -116,8 +116,8 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/pw_quality
 
 %files -n pam_pwquality
 %{_sysconfdir}/pam.d/pw_quality
-/%{_lib}/security/pam_pwquality.so
-%{_mandir}/man8/pam_pwquality.8*
+%{_libdir}/security/pam_pwquality.so
+%doc %{_mandir}/man8/pam_pwquality.8*
 
 %files -n %{libname}
 %{_libdir}/%{name}.so.%{major}*
