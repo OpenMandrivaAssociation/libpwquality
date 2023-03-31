@@ -7,8 +7,8 @@
 
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
-Version:	1.4.4
-Release:	2
+Version:	1.4.5
+Release:	1
 License:	BSD
 Group:		System/Libraries
 Url:		https://github.com/libpwquality/libpwquality/
@@ -112,7 +112,7 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/pw_quality
 
 %files common
 %config(noreplace) %{_sysconfdir}/security/%{oname}.conf
-%{_mandir}/man5/pwquality.conf.5*
+%doc %{_mandir}/man5/pwquality.conf.5*
 
 %files -n pam_pwquality
 %{_sysconfdir}/pam.d/pw_quality
