@@ -5,6 +5,8 @@
 %define libname %mklibname %{oname} %{major}
 %define devname %mklibname %{oname} -d
 
+%bcond_without python
+
 Summary:	Library for password quality checking and generating random passwords
 Name:		libpwquality
 Version:	1.4.5
@@ -15,9 +17,12 @@ Url:		https://github.com/libpwquality/libpwquality/
 Source0:	https://github.com/libpwquality/libpwquality/releases/download/libpwquality-%{version}/%{name}-%{version}.tar.bz2
 Source1:	pw_quality.pamd
 Patch0:		libpwquality-1.4.4-fix-python-linking.patch
+Patch1:		libpwquality-1.4.5-fix-python-cflags.patch
 BuildRequires:	libcrack-devel
 BuildRequires:	pam-devel
+%if %{with python}
 BuildRequires:	pkgconfig(python3)
+%endif
 
 %description
 The libpwquality library purpose is to provide common functions for password
@@ -90,15 +95,25 @@ applications.
 
 %build
 %configure \
-    --with-securedir=%{_libdir}/security \
-    --with-pythonsitedir=%{py_platsitedir} \
-    --enable-pam \
-    --disable-static
+	--with-securedir=%{_libdir}/security \
+%if %{with python}
+	--with-pythonsitedir=%{py_platsitedir} \
+%else
+	--disable-python-bindings \
+%endif
+	--enable-pam \
 
-%make_build
+%make_build CFLAGS="%{optflags}"
 
 %install
 %make_install
+%if %{with python}
+# make install seems to forget about this...
+cd python
+python setup.py install --prefix=%{_prefix} --root=%{buildroot}
+cd ..
+rm -f %{buildroot}%{py_platsitedir}/*.egg
+%endif
 
 install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/pw_quality
 
@@ -127,6 +142,8 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/pam.d/pw_quality
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{oname}.pc
 
+%if %{with python}
 %files -n python-pwquality
 %{py_platsitedir}/%{oname}.*.so
 %{py_platsitedir}/%{oname}-%{version}-py%{py_ver}.egg-info
+%endif

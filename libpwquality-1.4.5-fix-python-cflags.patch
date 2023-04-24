@@ -1,0 +1,16 @@
+diff -up libpwquality-1.4.5/python/Makefile.am.omv~ libpwquality-1.4.5/python/Makefile.am
+--- libpwquality-1.4.5/python/Makefile.am.omv~	2023-04-24 16:48:28.854419361 +0200
++++ libpwquality-1.4.5/python/Makefile.am	2023-04-24 16:48:53.544580274 +0200
+@@ -11,10 +11,10 @@ CLEANFILES = *~ constants.c *.so
+ EXTRA_DIST = pwquality.c setup.py
+ 
+ all-local:
+-	CFLAGS="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV)
++	OPT="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV)
+ 
+ install-exec-local:
+-	CFLAGS="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV) install --prefix=${DESTDIR}${prefix}
++	OPT="${CFLAGS} -fno-strict-aliasing" @PYTHONBINARY@ setup.py build --build-base py$(PYTHONREV) install --prefix=${prefix} --root=${DESTDIR}
+ 
+ clean-local:
+ 	rm -rf py$(PYTHONREV)
