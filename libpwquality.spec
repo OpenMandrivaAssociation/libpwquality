@@ -108,6 +108,8 @@ applications.
 %install
 %make_install
 %if %{with python}
+# (tpg) 2023-04-26 TEST FAILED: /builddir/build/BUILDROOT/libpwquality-1.4.5-2.x86_64/usr/lib64/python3.11/site-packages/ does NOT support .pth files
+export SETUPTOOLS_USE_DISTUTILS=stdlib
 # make install seems to forget about this...
 cd python
 python setup.py install --prefix=%{_prefix} --root=%{buildroot}
