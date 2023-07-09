@@ -2,8 +2,15 @@
 
 %define oname pwquality
 %define major 1
-%define libname %mklibname %{oname} %{major}
+%define libname %mklibname %{oname}
+%define oldlibname %mklibname %{oname} %{major}
 %define devname %mklibname %{oname} -d
+
+# Workaround for libtool messing up badly on crosscompiles
+# (spaces in $CC)
+%if %{cross_compiling}
+%define prefer_gcc 1
+%endif
 
 %bcond_without python
 
@@ -65,6 +72,7 @@ This package contains the PAM module for %{name}.
 Summary:	Shared libraries for %{oname}
 Group:		System/Libraries
 Requires:	%{name}-common >= %{version}-%{release}
+%rename %{oldlibname}
 
 %description -n %{libname}
 The libpwquality library purpose is to provide common functions for password
